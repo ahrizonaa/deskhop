@@ -1,0 +1,30 @@
+<mat-toolbar>
+  <span>Desk Hop</span>
+</mat-toolbar>
+
+<div class="viewport">
+  <div [style.backgroundImage]="backgroundImage" class="background"></div>
+  <div class="control-container">
+    <mat-form-field class="chip-list" appearance="fill">
+      <mat-label>Search</mat-label>
+      <mat-chip-list #chipList aria-label="Tag selection">
+        <mat-chip *ngFor="let tag of allTags; let i = index" (removed)="remove(i)">
+          {{ tag }}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+        <input placeholder="New thing..." autofocus placeholder="New thing..." [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true"
+          (matChipInputTokenEnd)="add($event)">
+      </mat-chip-list>
+    </mat-form-field>
+
+
+    <div>
+      <button (click)="setWallpaper()" mat-raised-button color="accent">Desk Hop</button>
+    </div>
+    <p></p>
+    <mat-progress-bar class="progress-bar" *ngIf="isloading" mode="indeterminate"></mat-progress-bar>
+  </div>
+</div>
